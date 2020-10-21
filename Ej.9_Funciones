@@ -1,0 +1,221 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Funciones_ejercicio9 : MonoBehaviour
+{
+
+    public bool human, elven, dwarf, mage;
+
+    void Start()
+    {
+        string race;
+
+        if (human == true)
+        {
+            race = "human";
+        }
+        else
+        {
+            if (elven == true)
+            {
+                race = "elven";
+            }
+            else
+            {
+                if (dwarf == true)
+                {
+                    race = "dwarf";
+                }
+                else
+                {
+                    race = "mage";
+                }
+            }
+        }
+
+
+        //llamada a la funcion create--------------------------------------
+        int[] atributos = createRPGCharacter(race);
+
+        Debug.Log("Atributos del " + race + " STR: " + atributos[0] + " /  SPD: " + atributos[1] + " /  VIT: " + atributos[2] + " /  DEX: " + atributos[3] + " /  MAG: " + atributos[4]);
+
+    }
+
+
+    //Funcion generar atributos-------------------------------------------
+    int[] createRPGCharacter(string race)
+    {
+        int[] atributos;
+        int tirada = 0;
+        // STR = Strength     SPD = Speed     VIT = Vitalidad    DEX = Dexterity    MAG = Magic 
+
+        if (race == "human")
+        {
+            atributos = new int[] { 8, 4, 0, 0, 0 };
+            //dado por defecto
+            for (int i = 0; i < 5; i++)
+            {
+                tirada = diceThrow(20);
+                atributos[i] = atributos[i] + tirada;
+            }
+            //dado por raza
+            //menor que 4 porque solo lanza 4 dados para el humano
+            for (int i = 0; i < 4; i++)
+            {
+                switch (i)
+                {
+                    case 0:// fuerza dado 1
+                        tirada = diceThrow(6);
+                        atributos[0] = atributos[0] + tirada;
+                        break;
+                    case 1://fuerza dado 2
+                        tirada = diceThrow(6);
+                        atributos[0] = atributos[0] + tirada;
+                        break;
+                    case 2://velocidad
+                        tirada = diceThrow(6);
+                        atributos[1] = atributos[1] + tirada;
+                        break;
+                    case 3://magia
+                        tirada = diceThrow(10);
+                        atributos[4] = atributos[4] + tirada;
+                        break;
+                }
+            }
+
+
+        }
+        else
+        {
+            if (race == "elven")
+            {
+                atributos = new int[] { 6, 0, 0, 3, 0 };
+                //dado por defecto
+                for (int i = 0; i < 5; i++)
+                {
+                    tirada = diceThrow(20);
+                    atributos[i] = atributos[i] + tirada;
+                }
+                //dado por raza
+                //menor que 5 porque solo lanza 5 dados para el elfo
+                for (int i = 0; i < 5; i++)
+                {
+                    switch (i)
+                    {
+                        case 0:// fuerza dado 1
+                            tirada = diceThrow(4);
+                            atributos[0] = atributos[0] + tirada;
+                            break;
+                        case 1://fuerza dado 2
+                            tirada = diceThrow(4);
+                            atributos[0] = atributos[0] + tirada;
+                            break;
+                        case 2://vitalidad
+                            tirada = diceThrow(12);
+                            atributos[2] = atributos[2] + tirada;
+                            break;
+                        case 3://destreza 1
+                            tirada = diceThrow(10);
+                            atributos[3] = atributos[3] + tirada;
+                            break;
+                        case 4://destreza 2
+                            tirada = diceThrow(10);
+                            atributos[3] = atributos[3] + tirada;
+                            break;
+                    }
+                }
+
+
+            }
+            else
+            {
+                if (race == "dwarf")
+                {
+                    atributos = new int[] { 10, 0, 10, 0, 0 };
+                    //dado por defecto
+                    for (int i = 0; i < 5; i++)
+                    {
+                        tirada = diceThrow(20);
+                        atributos[i] = atributos[i] + tirada;
+                    }
+                    //dado por raza
+                    //menor que 5 porque solo lanza 5 dados para el enano
+                    for (int i = 0; i < 5; i++)
+                    {
+                        switch (i)
+                        {
+                            case 0:// fuerza
+                                tirada = diceThrow(10);
+                                atributos[0] = atributos[0] + tirada;
+                                break;
+                            case 1://rapidez 1
+                                tirada = diceThrow(8);
+                                atributos[1] = atributos[1] + tirada;
+                                break;
+                            case 2://rapidez 2
+                                tirada = diceThrow(8);
+                                atributos[1] = atributos[1] + tirada;
+                                break;
+                            case 3://vitalidad
+                                tirada = diceThrow(8);
+                                atributos[2] = atributos[2] + tirada;
+                                break;
+                            case 4://magia
+                                tirada = diceThrow(8);
+                                atributos[4] = atributos[4] + tirada;
+                                break;
+                        }
+
+                    }
+                }
+                else
+                {
+                    //Atributos mago
+                    atributos = new int[] { 0, 0, 0, 0, 12 };
+                    //dado por defecto
+                    for (int i = 0; i < 5; i++)
+                    {
+                        tirada = diceThrow(20);
+                        atributos[i] = atributos[i] + tirada;
+                    }
+                    //dado por raza
+                    //menor que 3 porque solo lanza 3 dados para el elfo
+                    for (int i = 0; i < 3; i++)
+                    {
+                        switch (i)
+                        {
+                            case 0://fuerza
+                                tirada = diceThrow(6);
+                                atributos[0] = atributos[0] + tirada;
+                                break;
+                            case 1://vitalidad
+                                tirada = diceThrow(10);
+                                atributos[2] = atributos[2] + tirada;
+                                break;
+                            case 2://magia
+                                tirada = diceThrow(8);
+                                atributos[4] = atributos[4] + tirada;
+                                break;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return atributos;
+    }
+
+    //Funcion lanzar dado--------------------------------------------------
+    int diceThrow(int caras)
+    {
+        int tirada;
+
+        tirada = Random.Range(1, (caras + 1));
+
+        return tirada;
+    }
+
+
+}
